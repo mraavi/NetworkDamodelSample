@@ -15,13 +15,13 @@ import java.util.ArrayList;
  */
 
 public class ChannelListAdapter extends BaseAdapter {
-
+    private final String THUMNAIL_URL_TEMPLATE = "http://data.jioplay.in/guide/v5/thumbnail/infotel/r4g/5.0/default/channel_id/100x80.light.png";
 
     public class ViewHolder{
 
         TextView name;
         TextView id;
-        ImageView thumbnail_id;
+        ImageView thumnail;
 
     }
 
@@ -60,11 +60,14 @@ public class ChannelListAdapter extends BaseAdapter {
         view = layoutInflater.inflate(R.layout.channel_list_item, viewGroup, false);
         viewHolder.name = (TextView) view.findViewById(R.id.name);
         viewHolder.id = (TextView)view.findViewById(R.id.id);
-        viewHolder.thumbnail_id = (ImageView)view.findViewById(R.id.icon);
+        viewHolder.thumnail = (ImageView)view.findViewById(R.id.icon);
 
         Channel channel = mChannelList.get(pos);
         viewHolder.name.setText(channel.getName());
         viewHolder.id.setText(channel.getId());
+        String thumbnailUrl = THUMNAIL_URL_TEMPLATE.replace("channel_id", channel.getThumnailId());
+        new ImageDownloaderTask(viewHolder.thumnail).execute(thumbnailUrl);
+
 
         return view;
     }
