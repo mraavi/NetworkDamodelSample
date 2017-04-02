@@ -5,8 +5,9 @@ package com.appcrops.networksample;
  */
 
 public class Channel {
-    private String id;
     private String name;
+    private String id;
+
     protected String thumbnail_id;
 
     public Channel(String id, String name, String thumnailId) {
